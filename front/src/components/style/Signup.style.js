@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const SignupForm = styled.div`
   display: flex;
@@ -14,6 +14,12 @@ export const SignupForm = styled.div`
     font-size: 25px;
     margin-bottom: 10px;
     font-weight: bold;
+  }
+
+  .check-password {
+    margin-top: -10px;
+    font-size: 12px;
+    color: red;
   }
   button {
     margin-top: 20px;
