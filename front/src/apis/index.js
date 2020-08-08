@@ -6,7 +6,8 @@ export const callApi = async ({ method = "GET", url, body }) => {
     headers: {
       "Content-Type": "application/json"
     },
-    body
+    body: body && JSON.stringify(body)
   });
+  console.log(response);
   return await response.json();
 };
