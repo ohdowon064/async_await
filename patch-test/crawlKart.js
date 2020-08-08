@@ -17,7 +17,7 @@ const runPuppeteer = async() => {
             return elements.map((element) => {
                 const href = element.children[0].href;
                 const id = href.match(/\d{5}/)[0];
-                const title = element.textContent;
+                const title = element.textContent.trim();
                 return [id, href, title];
             });
         });
