@@ -1,10 +1,11 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const LogInForm = styled.form`
   display: flex;
   flex-direction: column;
   margin-left: 20px;
-
+  width: 30%;
+  min-width: 200px;
   .typeInfo {
     width: 30%;
     min-width: 200px;
@@ -21,12 +22,20 @@ export const LogInForm = styled.form`
   }
 
   input {
-    width: 15vw;
+    width: 150px;
+    margin-bottom: 10px;
   }
 
+  input:hover {
+    outline-color: #63a4ff;
+  }
   button {
     width: 30%;
     min-width: 100px;
     margin-top: 10px;
+  }
+  .ant-btn {
+    background: #63a4ff;
+    border-color: #63a4ff;
   }
 `;
