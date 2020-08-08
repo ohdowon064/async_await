@@ -1,32 +1,32 @@
-import React, { useEffect, useState } from 'react';
-import { PatchDiv } from './style/PatchList.style';
-import { callApi } from '../apis';
-import PatchElement from '../components/PatchElement';
+import React, { useEffect, useState, useCallback } from "react";
+import { PatchDiv } from "./style/PatchList.style";
+import { callApi } from "../apis";
+import PatchElement from "../components/PatchElement";
 
 const title = {
-  lol: '리그오브레전드',
-  maple: '메이플스토리',
-  kart: '카트라이더',
+  lol: "리그오브레전드",
+  maple: "메이플스토리",
+  kart: "카트라이더"
 };
 
 const PatchList = ({ match }) => {
   const [patchList, setPatchList] = useState([]);
 
-  const fetchList = async () => {
+  const fetchList = useCallback(async () => {
     const response = await callApi({ url: `/${match.params.name}` });
     setPatchList(response.sort((a, b) => b.index - a.index));
-  };
+  }, [match.params.name]);
 
   useEffect(() => {
     fetchList();
-  }, [match.params.name]);
+  }, [fetchList]);
 
   return (
     <PatchDiv>
-      <div className='title'>{title[match.params.name]}</div>
+      <div className="title">{title[match.params.name]}</div>
       <ul>
         {patchList &&
-          patchList.map((content) => (
+          patchList.map(content => (
             <PatchElement
               key={content.index}
               title={content.title}
