@@ -1,32 +1,57 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-export const AppForm = styled.div`
+export const AppContainer = styled.main`
   width: 100%;
   height: 100vh;
+  font-family: 'MaplestoryOTFLight';
 
-  .headerForm {
+  .menu-header {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid lightgray;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    z-index: 2;
+    background: #ffffff;
     box-shadow: rgb(191, 199, 206) 0px 2px 5px 0.5px;
+
+    & span {
+      a {
+        color: #9e9e9e;
+      }
+      width: 20%;
+      min-width: 300px;
+      margin-left: 30px;
+      font-weight: bold;
+      font-size: 25px;
+    }
   }
-  main {
+
+  & > section {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     width: 100%;
     height: 100%;
-    margin-top: 30px;
+    margin-top: 100px;
   }
 
   .login {
-    width: 25vw;
+    width: 10%;
+    min-width: 150px;
     height: 100%;
+    position: fixed;
+    left: 0;
+    top: 100px;
   }
 
-  .mainContent {
-    width: 75vw;
+  .section-content {
+    margin-left: 225px;
+    width: 80%;
     height: 100%;
   }
 `;

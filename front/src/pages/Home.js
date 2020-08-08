@@ -1,10 +1,24 @@
-import React from "react";
+import React from 'react';
+import styled from 'styled-components';
+
+const HomeStyle = styled.section`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 50px;
+  text-transform: uppercase;
+  min-width: 700px;
+  height: 70vh;
+`;
 
 const Home = () => {
-  const test = `
-    <div>최정은</div><div>테스트입니다.</div><div>됨</div><ul><li>테스트</li><li>으악</li></ul>
-  `;
-  return <div dangerouslySetInnerHTML={{ __html: test }}></div>;
+  return (
+    <HomeStyle>
+      welcome our homepage!
+      <br />
+      we are async await!
+    </HomeStyle>
+  );
 };
 
 export default Home;
