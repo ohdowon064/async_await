@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { SignupForm } from "./style/Signup.style";
+import { SignupDiv } from "./style/Signup.style";
 import { TypingInfo } from "./style/TypingInfo.style";
 import { Input, Modal } from "antd";
 import useInputs from "../Hooks/onInputChange";
@@ -21,7 +21,7 @@ const Signup = ({ clickSignup, isVisible }) => {
 
   const onSubmit = useCallback(
     async e => {
-      e.preventDefault();
+      // e.preventDefault();
       const response = await callApi({
         method: "POST",
         url: "/user",
@@ -33,9 +33,11 @@ const Signup = ({ clickSignup, isVisible }) => {
         }
       });
       console.log(response);
+      clickSignup(prev => !prev);
     },
-    [id, userName, email, password]
+    [id, userName, email, password, clickSignup]
   );
+
   return (
     <Modal
       title="회원가입"
@@ -43,7 +45,7 @@ const Signup = ({ clickSignup, isVisible }) => {
       onOk={onSubmit}
       onCancel={clickSignup}
     >
-      <SignupForm>
+      <SignupDiv>
         <div>
           <TypingInfo length="250px">
             <div>이름</div>
@@ -75,7 +77,7 @@ const Signup = ({ clickSignup, isVisible }) => {
             <Input type="email" value={email} onChange={setEmail} />
           </TypingInfo>
         </div>
-      </SignupForm>
+      </SignupDiv>
     </Modal>
   );
 };
