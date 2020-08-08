@@ -4,7 +4,7 @@ const KartPatch = require('../models/KartPatch');
 
 /* GET home page. */
 router.get('/', (req, res, next) => {
-    KartPatch.find({}, {index:1, title:1}, function(err, result) {
+  KartPatch.find({}, {index:1, title:1}, function(err, result) {
     if (err) {
       console.log(err);
     } else {
