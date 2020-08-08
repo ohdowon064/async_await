@@ -43,7 +43,7 @@ const runPupperteer = async () => {
   } catch (e) {
     console.error(e);
   } finally {
-    await page.waitFor(10000);
+    await page.waitFor(1000);
     await browser.close();
   }
 };

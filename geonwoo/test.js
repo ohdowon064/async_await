@@ -1,11 +1,11 @@
 const puppeteer = require('puppeteer');
 
 const runPupperteer = async () => {
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({ headless: false });
   const page = await browser.newPage();
 
   // DB에서 가지고 온 번호
-  const lastNumber = 411;
+  const lastNumber = 410;
 
   await page.goto('http://www.inven.co.kr/board/lol/3329');
 
@@ -31,10 +31,12 @@ const runPupperteer = async () => {
     return content;
   };
 
+  const lastPatches = [];
+
   // 최근 패치들을 담음.
-  const lastPatches = await Promise.all(
-    lastPages.map((pageInfo) => getPatchNote(page, pageInfo[1]))
-  );
+  for (let i = 0; i < lastPages.length; i++) {
+    lastPatches.push(await getPatchNote(page, lastPages[i][1]));
+  }
 
   // html 결과들이 배열 형태로 온다.
   console.log(lastPatches);
