@@ -11,12 +11,12 @@ router.post('/', function(req, res, next) {
     .then((userInfo) => {
       console.log(userInfo);
       console.log('새로운 유저가 회원가입 했습니다.');
-      res.send(200);
+      res.status(200).json({message:'새로운 유저가 회원가입 했습니다.'});
     })
     .catch((err) => {
       console.log(err);
       console.log('회원가입이 실패했습니다.');
-      res.send(403);
+      res.status(403).json({message:'회원가입에 실패했습니다.'});
     })
 });
 
