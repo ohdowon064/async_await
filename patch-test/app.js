@@ -6,6 +6,10 @@ const logger = require('morgan');
 const mongoose = require('mongoose');
 const dbConfig = require('./config/db');
 const cors = require('cors');
+const crawlLol = require('./functions/crawlLol');
+const crawlKart = require('./functions/crawlKart');
+const crawlMaple = require('./functions/crawlMaple');
+const schedule = require('node-schedule');
 // mongoose.Promise = global.Promise;
 
 mongoose.connect(dbConfig.connectInfo, {
@@ -38,6 +42,21 @@ app.use('/users', usersRouter);
 app.use('/lol', lolRouter);
 app.use('/maple', mapleRouter);
 app.use('/kart', kartRouter);
+
+// hour: 12, minute: 01, dayOfWeek: [0, new schedule.Range(0, 6)]
+const lolJob = schedule.scheduleJob({second:1}, () => {
+console.log('Scrapping the patch notes of [League of Legend]');
+ crawlLol();
+});
+const kartJob = schedule.scheduleJob({second:12}, () => {
+  console.log('Scrapping the patch notes of [Kartrider]');
+  crawlKart();
+});
+const mapleJob = schedule.scheduleJob({second:23}, () => {
+  console.log('Scrapping the patch notes of [Maplestory]');
+  crawlMaple();
+});
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

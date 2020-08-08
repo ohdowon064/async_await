@@ -1,7 +1,10 @@
 const mongoose = require('mongoose');
 
 const LolPatchSchema = new mongoose.Schema({
-    index : Number,
+    index : {
+        type:Number,
+        unique:true
+    },
     title : String,
     content : String,
     created_at : {
