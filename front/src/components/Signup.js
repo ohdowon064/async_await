@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { SignupDiv } from "./style/Signup.style";
 import { TypingInfo } from "./style/TypingInfo.style";
-import { Input, Modal } from "antd";
+import { Input, Modal, message } from "antd";
 import useInputs from "../Hooks/onInputChange";
 import { callApi } from "../apis";
 
@@ -19,24 +19,27 @@ const Signup = ({ clickSignup, isVisible }) => {
       : setIsCorrectPassword(false);
   }, [password, checkPassword]);
 
-  const onSubmit = useCallback(
-    async e => {
-      // e.preventDefault();
-      const response = await callApi({
-        method: "POST",
-        url: "/user",
-        body: {
-          name: userName,
-          id,
-          password,
-          email
-        }
-      });
-      console.log(response);
-      clickSignup(prev => !prev);
-    },
-    [id, userName, email, password, clickSignup]
-  );
+  const onSubmit = useCallback(async () => {
+    try {
+      if (!userName.trim() || !id.trim() || !password.trim() || !email.trim()) {
+        message.error("빈칸을 채워주세요.");
+      } else {
+        const response = await callApi({
+          method: "POST",
+          url: "/user",
+          body: {
+            name: userName,
+            id,
+            password,
+            email
+          }
+        });
+        clickSignup(prev => !prev);
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  }, [id, userName, email, password, clickSignup]);
 
   return (
     <Modal

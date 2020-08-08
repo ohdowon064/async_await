@@ -1,16 +1,15 @@
 import React, { useState, useCallback } from "react";
 import useInputs from "../Hooks/onInputChange";
-import { Input, Button } from "antd";
+import { Input, Button, message } from "antd";
 import { LogInForm } from "./style/Login.style";
 import { TypingInfo } from "./style/TypingInfo.style";
 import Signup from "./Signup";
 import { callApi } from "../apis";
 
-const Login = () => {
+const Login = ({ setUserInfo }) => {
   const [id, setId] = useInputs("");
   const [password, setPassword] = useInputs("");
   const [isVisibleModal, setIsVisibleModal] = useState(false);
-
   const clickSignup = useCallback(() => {
     setIsVisibleModal(prev => !prev);
   }, []);
@@ -18,17 +17,25 @@ const Login = () => {
   const onSubmit = useCallback(
     async e => {
       e.preventDefault();
-      const response = await callApi({
-        method: "POST",
-        url: "/user/login",
-        body: {
-          id,
-          password
+      try {
+        if (!id.trim() || !password.trim()) {
+          message.error("빈칸을 채워주세요.");
+        } else {
+          const response = await callApi({
+            method: "POST",
+            url: "/user/login",
+            body: {
+              id,
+              password
+            }
+          });
+          setUserInfo({ userName: response.name, userId: response.id });
         }
-      });
-      console.log(response);
+      } catch (e) {
+        console.error(e);
+      }
     },
-    [id, password]
+    [id, password, setUserInfo]
   );
 
   return (
@@ -47,7 +54,9 @@ const Login = () => {
       {isVisibleModal && (
         <Signup clickSignup={clickSignup} isVisible={isVisibleModal} />
       )}
-      <Button type="primary">로그인</Button>
+      <Button htmlType="submit" type="primary">
+        로그인
+      </Button>
     </LogInForm>
   );
 };

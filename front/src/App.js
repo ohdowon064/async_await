@@ -1,14 +1,15 @@
-import React from 'react';
-import PatchList from './pages/PatchList';
-import Login from './components/Login';
-import Home from './pages/Home.js';
-import PatchNote from './pages/PatchNote.js';
-import Header from './components/Header.js';
+import React, { useState } from "react";
+import PatchList from "./pages/PatchList";
+import Login from "./components/Login";
+import Home from "./pages/Home.js";
+import PatchNote from "./pages/PatchNote.js";
+import Header from "./components/Header.js";
 
-import { Route, Switch } from 'react-router-dom';
-import { createGlobalStyle } from 'styled-components';
-import { AppContainer } from './App.style.js';
-import 'antd/dist/antd.css';
+import { Route, Switch } from "react-router-dom";
+import { createGlobalStyle } from "styled-components";
+import { AppContainer } from "./App.style.js";
+import "antd/dist/antd.css";
+import UserInfo from "./components/UserInfo";
 
 const GlobalStyle = createGlobalStyle`
   @font-face { 
@@ -19,19 +20,25 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 function App() {
+  const [userInfo, setUserInfo] = useState({ userName: "", userId: "" });
+
   return (
     <AppContainer>
       <GlobalStyle />
       <Header />
       <section>
-        <div className='login'>
-          <Login />
+        <div className="login">
+          {userInfo.userName ? (
+            <UserInfo userInfo={userInfo} />
+          ) : (
+            <Login setUserInfo={setUserInfo} />
+          )}
         </div>
-        <div className='section-content'>
+        <div className="section-content">
           <Switch>
-            <Route exact path='/' component={Home} />
-            <Route exact path='/:name' component={PatchList} />
-            <Route path='/:name/:id' component={PatchNote} />
+            <Route exact path="/" component={Home} />
+            <Route exact path="/:name" component={PatchList} />
+            <Route path="/:name/:id" component={PatchNote} />
           </Switch>
         </div>
       </section>
