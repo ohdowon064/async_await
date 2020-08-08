@@ -1,5 +1,5 @@
-import React, { memo } from 'react';
-import { Link } from 'react-router-dom';
+import React, { memo } from "react";
+import { Link } from "react-router-dom";
 
 const PatchElement = memo(({ name, id, title }) => {
   return (
