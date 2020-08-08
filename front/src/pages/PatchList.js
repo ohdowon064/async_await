@@ -5,7 +5,7 @@ import { callApi } from "../apis";
 
 const title = {
   lol: "리그오브레전드",
-  maplestory: "메이플스토리",
+  maple: "메이플스토리",
   kart: "카트라이더"
 };
 
@@ -15,7 +15,7 @@ const contents = {
     { title: "2패치", id: 2 },
     { title: "3패치", id: 3 }
   ],
-  maplestory: [
+  maple: [
     { title: "1패치", id: 1 },
     { title: "2패치", id: 2 },
     { title: "3패치", id: 3 }
@@ -30,10 +30,15 @@ const contents = {
 const PatchList = ({ match }) => {
   const [patchList, setPatchList] = useState([]);
 
-  // useEffect(async () => {
-  //   const response = await callApi({ url: `/${match.params.name}` });
-  //   setPatchList(response);
-  // }, []);
+  const fetchList = async() => {
+    const response = await callApi({ url: `/${match.params.name}` });
+    console.log(response);
+    setPatchList(response);
+  }
+  
+  useEffect(() => {
+    fetchList();
+  }, [match.params.name]);
 
   return (
     <PatchDiv>

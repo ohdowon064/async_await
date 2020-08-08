@@ -1,7 +1,7 @@
-const BASE_URL = "http://localhost:5000/";
+const BASE_URL = "http://localhost:5000";
 
-const callApi = async ({ method = "GET", url, body }) => {
-  const response = await fetch(`${BASE_URL}/${url}`, {
+export const callApi = async ({ method = "GET", url, body }) => {
+  const response = await fetch(`${BASE_URL}${url}`, {
     method,
     headers: {
       "Content-Type": "application/json"
