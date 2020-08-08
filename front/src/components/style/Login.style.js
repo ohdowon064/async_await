@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const LogInForm = styled.form`
   display: flex;
@@ -6,6 +6,7 @@ export const LogInForm = styled.form`
   margin-left: 20px;
   width: 30%;
   min-width: 200px;
+
   .typeInfo {
     width: 30%;
     min-width: 200px;
@@ -21,14 +22,6 @@ export const LogInForm = styled.form`
     cursor: pointer;
   }
 
-  input {
-    width: 150px;
-    margin-bottom: 10px;
-  }
-
-  input:hover {
-    outline-color: #63a4ff;
-  }
   button {
     width: 30%;
     min-width: 100px;
