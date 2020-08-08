@@ -1,13 +1,13 @@
-import React, { useEffect, useState, useCallback } from "react";
-import { callApi } from "../apis";
-import { PatchNoteStyle } from "./style/PatchNote.style";
+import React, { useEffect, useState, useCallback } from 'react';
+import { callApi } from '../apis';
+import { PatchNoteStyle } from './style/PatchNote.style';
 
 const PatchNote = ({ match }) => {
-  const [patchNote, setPatchNote] = useState("");
+  const [patchNote, setPatchNote] = useState('');
 
   const fetchList = useCallback(async () => {
     const response = await callApi({
-      url: `/${match.params.name}/${match.params.id}`
+      url: `/${match.params.name}/${match.params.id}`,
     });
     setPatchNote(response);
   }, [match.params.name, match.params.id]);
